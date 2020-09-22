@@ -1,0 +1,17 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+    name: health-report-batch-job
+spec:
+    schedule: "0 0 * * *"
+    jobTemplate:
+        spec:
+            template:
+                metadata:
+                    labels:
+                        app: health-batch-job
+                spec:
+                    restartPolicy: Never
+                    containers:
+                        - name: main
+                          image: fusidic/health-report
